@@ -7,10 +7,18 @@ function App() {
     <div className="App">
       <h1 id="header"></h1>
       <div id="navbar">
-        <Link to="/">Home</Link>
-        <Link to="/posts">Posts</Link>
-        <Link to="/profile">Profile</Link>
-        <Link to="/logout">Log Out</Link>
+        <Link to="/" className="links">
+          Home
+        </Link>
+        <Link to="/posts" className="links">
+          Posts
+        </Link>
+        <Link to="/profile" className="links">
+          Profile
+        </Link>
+        <Link to="/logout" className="links">
+          Log Out
+        </Link>
       </div>
       <div id="main">
         <Routes>
