@@ -1,8 +1,13 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
 import Posts from "./Components/Posts";
+import Home from "./Components/Home";
+import { useState } from "react";
+import RegisterForm from "./Components/RegisterForm";
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem("token"));
+
   return (
     <div className="App">
       <h1 id="header"></h1>
@@ -22,6 +27,7 @@ function App() {
       </div>
       <div id="main">
         <Routes>
+          <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
         </Routes>
       </div>
