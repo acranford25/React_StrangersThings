@@ -1,15 +1,18 @@
 import React, { useState } from "react";
-import { postUser } from "../api";
+import { registerUser } from "../api";
+import useAuth from "../hooks/useAuth";
 
 export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(localStorage.getItem("token"));
+
+  const { setToken, user } = useAuth();
+  console.log("User from RegisterForm: ", user);
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      const result = await postUser(username, password);
+      const result = await registerUser(username, password);
       console.log("result in comp", result);
       result.success
         ? (setToken(result.data.token),

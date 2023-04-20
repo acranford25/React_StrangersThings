@@ -10,7 +10,7 @@ export async function getPosts() {
   }
 }
 
-export async function postUser(username, password) {
+export async function registerUser(username, password) {
   try {
     const response = await fetch(`${BASE_URL}users/register`, {
       method: "POST",
@@ -28,6 +28,22 @@ export async function postUser(username, password) {
     console.log("Result from post user: ", result);
     return result;
   } catch (error) {
-    console.log("trouble posting user", error);
+    console.error("trouble posting user", error);
+  }
+}
+
+export async function fetchMyData(token) {
+  try {
+    const response = await fetch(`${BASE_URL}users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log("Result from fetchMyData", result);
+    return result;
+  } catch (error) {
+    console.error(error);
   }
 }

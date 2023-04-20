@@ -6,8 +6,11 @@ import RegisterForm from "./Components/RegisterForm";
 import Profile from "./Components/Profile";
 import LogIn from "./Components/Login";
 import LogOut from "./Components/Logout";
+import useAuth from "./hooks/useAuth";
 
 function App() {
+  const { token, user } = useAuth();
+
   return (
     <div className="App">
       <h1 id="header"></h1>
