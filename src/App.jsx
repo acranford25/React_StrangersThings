@@ -6,8 +6,6 @@ import { useState } from "react";
 import RegisterForm from "./Components/RegisterForm";
 
 function App() {
-  const [token, setToken] = useState(localStorage.getItem("token"));
-
   return (
     <div className="App">
       <h1 id="header"></h1>
