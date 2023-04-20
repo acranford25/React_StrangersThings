@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { postUser } from "../api";
 
-export default function RegisterForm({ setToken }) {
+export default function RegisterForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [token, setToken] = useState(localStorage.getItem("token"));
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
       const result = await postUser(username, password);
       console.log("result in comp", result);
-      setToken(result.data.token);
-      localStorage.setItem("token", result.data.token);
+      result.success
+        ? (setToken(result.data.token),
+          localStorage.setItem("token", result.data.token))
+        : alert(result.error.message);
     } catch (error) {
       console.log("trouble handling user", error);
     }
