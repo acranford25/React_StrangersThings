@@ -10,7 +10,7 @@ export async function getPosts() {
   }
 }
 
-export async function makePosts() {
+export async function makePosts(token, title, description, price, willDeliver) {
   try {
     const response = await fetch(`${BASE_URL}posts`, {
       method: "POST",
