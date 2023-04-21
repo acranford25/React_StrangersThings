@@ -20,6 +20,11 @@
   color: white;
 }
 
+.log {
+  display: flex;
+  margin-left: 15px;
+}
+
 #main {
   display: flex;
   flex-direction: row;

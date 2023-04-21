@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route, Link } from "react-router-dom";
+import Post from "./Components/Post";
 import Posts from "./Components/Posts";
 import Home from "./Components/Home";
 import RegisterForm from "./Components/RegisterForm";
@@ -24,10 +25,13 @@ function App() {
         <Link to="/profile" className="links">
           Profile
         </Link>
-        <Link to="/logIn" className="links">
+        <Link to="/post" className="log">
+          Post
+        </Link>
+        <Link to="/logIn" className="log">
           Log In/Out
         </Link>
-        <Link to="/register" className="links">
+        <Link to="/register" className="log">
           Register
         </Link>
       </div>
@@ -36,7 +40,8 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/posts" element={<Posts />} />
           <Route path="/profile" element={<Profile />} />
-          <Route path="/logIn" element={<LogIn />} />
+          <Route path="/post" element={<Post />} />
+          <Route path="/logIn/*" element={<LogIn />} />
           <Route path="/register" element={<RegisterForm />} />
         </Routes>
       </div>

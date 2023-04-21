@@ -10,6 +10,31 @@ export async function getPosts() {
   }
 }
 
+export async function makePosts() {
+  try {
+    const response = await fetch(`${BASE_URL}posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          willDeliver,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log("result from makePosts", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 export async function registerUser(username, password) {
   try {
     const response = await fetch(`${BASE_URL}users/register`, {
@@ -29,6 +54,28 @@ export async function registerUser(username, password) {
     return result;
   } catch (error) {
     console.error("trouble posting user", error);
+  }
+}
+
+export async function loginUser(username, password) {
+  try {
+    const response = await fetch(`${BASE_URL}users/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        user: {
+          username,
+          password,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log("loginUser result", result);
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }
 
