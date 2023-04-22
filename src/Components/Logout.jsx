@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
+
 export default function LogOut() {
-  return <div className="logout"></div>;
+  const { setToken } = useAuth();
 }

@@ -1,40 +1,5 @@
 const BASE_URL = `https://strangers-things.herokuapp.com/api/2301-FTB-ET-WEB-AM/`;
 
-export async function getPosts() {
-  try {
-    const response = await fetch(`${BASE_URL}posts`);
-    const result = await response.json();
-    return result;
-  } catch (error) {
-    console.log("Trouble fetching posts", error);
-  }
-}
-
-export async function makePosts(token, title, description, price, willDeliver) {
-  try {
-    const response = await fetch(`${BASE_URL}posts`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        post: {
-          title,
-          description,
-          price,
-          willDeliver,
-        },
-      }),
-    });
-    const result = await response.json();
-    console.log("result from makePosts", result);
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
-}
-
 export async function registerUser(username, password) {
   try {
     const response = await fetch(`${BASE_URL}users/register`, {
@@ -92,5 +57,57 @@ export async function fetchMyData(token) {
     return result;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export async function getPosts() {
+  try {
+    const response = await fetch(`${BASE_URL}posts`);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log("Trouble fetching posts", error);
+  }
+}
+
+export async function makePosts(token, title, description, price, willDeliver) {
+  try {
+    const response = await fetch(`${BASE_URL}posts`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          willDeliver,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log("result from makePosts", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function deletePosts(token) {
+  try {
+    const response = await fetch(`${BASE_URL}posts/${postId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log("result from deletePosts", result);
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }

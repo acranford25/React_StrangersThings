@@ -36,7 +36,7 @@ export default function Post() {
           type="text"
           name="title"
           placeholder="title"
-          required="true"
+          required={true}
           onChange={(event) => setTitle(event.target.value)}
         />
         <input
@@ -49,7 +49,7 @@ export default function Post() {
           type="text"
           name="price"
           placeholder="price 0.00"
-          required="true"
+          required={true}
           onChange={(event) => setPrice(event.target.value)}
         />
         <div>

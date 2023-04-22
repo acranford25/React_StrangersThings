@@ -30,12 +30,14 @@ export default function RegisterForm() {
           type="text"
           name="username"
           placeholder="username"
+          required={true}
           onChange={(event) => setUsername(event.target.value)}
         />
         <input
           type="text"
           name="password"
           placeholder="password"
+          required={true}
           onChange={(event) => setPassword(event.target.value)}
         />
         <button>Submit</button>

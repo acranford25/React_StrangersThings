@@ -8,7 +8,7 @@ export default function LogIn() {
   const [myUsername, setMyUsername] = useState("");
   const [myPassword, setMyPassword] = useState("");
 
-  const { setToken } = useAuth();
+  const { user, setUser, token, setToken } = useAuth();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -25,6 +25,14 @@ export default function LogIn() {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  function handleLogOut(event) {
+    event.preventDefault();
+    token
+      ? confirm("Are you sure you want to logout?") &&
+        (setToken(null), localStorage.setItem("token", null), setUser(null))
+      : alert("No users are signed in!");
   }
 
   return (
@@ -46,10 +54,9 @@ export default function LogIn() {
         />
         <button>Submit</button>
       </form>
-      <Link to="/logOut">LogOut</Link>
-      <Routes>
-        <Route path="/logOut" element={<LogOut />} />
-      </Routes>
+      <form onSubmit={handleLogOut}>
+        <button>LogOut</button>
+      </form>
     </div>
   );
 }
