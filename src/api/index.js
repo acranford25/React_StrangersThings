@@ -95,7 +95,7 @@ export async function makePosts(token, title, description, price, willDeliver) {
   }
 }
 
-export async function deletePosts(token) {
+export async function deletePosts(token, postId) {
   try {
     const response = await fetch(`${BASE_URL}posts/${postId}`, {
       method: "DELETE",
@@ -106,6 +106,31 @@ export async function deletePosts(token) {
     });
     const result = await response.json();
     console.log("result from deletePosts", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function patchPosts(token, postId) {
+  try {
+    const response = await fetch(`${BASE_URL}posts/${postId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        post: {
+          title,
+          description,
+          price,
+          willDeliver,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log("result from patch", result);
     return result;
   } catch (error) {
     console.log(error);

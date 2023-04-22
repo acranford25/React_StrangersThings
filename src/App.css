@@ -39,3 +39,13 @@
 .post {
   margin: 20px;
 }
+
+.myPosts {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+
+.myPost {
+  margin: 20px;
+}
