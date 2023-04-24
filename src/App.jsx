@@ -16,7 +16,15 @@ function App() {
     <div className="App">
       <div id="header">
         <div id="navbar">
-          {user ? <div id="user">Welcome, {user.username}</div> : null}
+          {user ? (
+            <div id="user">
+              {user.username.length > 10
+                ? `Hi, ${user.username.substring(0, 8)}..`
+                : `Hi, ${user.username}`}
+            </div>
+          ) : (
+            <div id="user">Hi, Guest!</div>
+          )}
           <Link to="/" className="links">
             Home
           </Link>

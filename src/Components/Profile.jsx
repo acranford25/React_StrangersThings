@@ -19,20 +19,10 @@ export default function Profile() {
         alert("No users found, please log in.");
       }
     }
-    fetch();
-  }, [token]);
-
-  /*async function handleDelete(event) {
-    event.preventDefault();
-
-    try {
-      const result = await deletePosts(token, postId);
-      console.log("result from delete button", result);
-      return result;
-    } catch (error) {
-      console.log("trouble fetching makePosts", error);
+    if (token) {
+      fetch();
     }
-  }*/
+  }, [token]);
 
   return (
     <div id="myPosts">
