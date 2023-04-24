@@ -106,7 +106,7 @@ export async function deletePosts(token, postId) {
     });
     const result = await response.json();
     console.log("result from deletePosts", result);
-    return result;
+    return result.data;
   } catch (error) {
     console.log(error);
   }

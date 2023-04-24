@@ -5,20 +5,24 @@ import { useState } from "react";
 
 export default function Profile() {
   const [posts, setPosts] = useState([]);
-  const [userId, setUserId] = useState(null);
+  const [post, setPost] = useState({});
   const [mesages, setMessages] = useState([]);
   const { token } = useAuth();
 
   useEffect(() => {
     async function fetch() {
-      const result = await fetchMyData(token);
-      console.log("result from profile", result);
-      setPosts(result.data.posts);
+      try {
+        const result = await fetchMyData(token);
+        console.log("result from profile", result);
+        setPosts(result.data.posts);
+      } catch (error) {
+        alert("No users found, please log in.");
+      }
     }
     fetch();
   }, [token]);
 
-  async function handleDelete(event) {
+  /*async function handleDelete(event) {
     event.preventDefault();
 
     try {
@@ -28,22 +32,50 @@ export default function Profile() {
     } catch (error) {
       console.log("trouble fetching makePosts", error);
     }
-  }
+  }*/
 
   return (
     <div id="myPosts">
       <section className="myPosts">
+        <h2>Active Posts</h2>
         {posts.map((post) => {
           return (
-            <div key={post._id}>
-              <div className="myPost">
-                <span className="name">{post.username}</span>
-                <span className="title">{post.title}</span>
-                <span className="description">{post.description}</span>
-                <span className="price">{post.price}</span>
+            post.active && (
+              <div key={post._id}>
+                <div className="myPost">
+                  <span className="name">{post.username}</span>
+                  <span className="title">{post.title}</span>
+                  <span className="description">{post.description}</span>
+                  <span className="price">{post.price}</span>
+                </div>
+                <form
+                  onClick={(event) => {
+                    event.preventDefault();
+                    console.log(post._id);
+                    deletePosts(token, post._id);
+                  }}
+                >
+                  <button type="onClick">Delete</button>
+                </form>
               </div>
-              <button onSubmit={handleDelete}>Delete</button>
-            </div>
+            )
+          );
+        })}
+      </section>
+      <section>
+        <h2>Inactive Posts</h2>
+        {posts.map((post) => {
+          return (
+            !post.active && (
+              <div key={post._id}>
+                <div className="myPost">
+                  <span className="name">{post.username}</span>
+                  <span className="title">{post.title}</span>
+                  <span className="description">{post.description}</span>
+                  <span className="price">{post.price}</span>
+                </div>
+              </div>
+            )
           );
         })}
       </section>
