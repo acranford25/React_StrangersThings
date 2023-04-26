@@ -70,6 +70,21 @@ export async function getPosts() {
   }
 }
 
+export async function getPost(postId) {
+  try {
+    const response = await fetch(`${BASE_URL}posts`);
+    const result = await response.json();
+    console.log("result from getPost(postId)", result);
+    const singleResult = result.data.posts.filter(
+      (post) => post._id === postId
+    )[0];
+    console.log("getPost api", singleResult);
+    return singleResult;
+  } catch (error) {
+    console.log("trouble fetching post", error);
+  }
+}
+
 export async function makePosts(token, title, description, price, willDeliver) {
   try {
     const response = await fetch(`${BASE_URL}posts`, {
@@ -112,7 +127,14 @@ export async function deletePosts(token, postId) {
   }
 }
 
-export async function patchPosts(token, postId) {
+export async function patchPosts(
+  token,
+  postId,
+  title,
+  description,
+  price,
+  willDeliver
+) {
   try {
     const response = await fetch(`${BASE_URL}posts/${postId}`, {
       method: "PATCH",
@@ -131,6 +153,28 @@ export async function patchPosts(token, postId) {
     });
     const result = await response.json();
     console.log("result from patch", result);
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function postMessage() {
+  try {
+    const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        message: {
+          content,
+        },
+      }),
+    });
+    const result = await response.json();
+    console.log(result);
     return result;
   } catch (error) {
     console.log(error);

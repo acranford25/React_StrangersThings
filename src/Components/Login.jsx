@@ -31,7 +31,7 @@ export default function LogIn() {
     event.preventDefault();
     token
       ? confirm("Are you sure you want to logout?") &&
-        (setToken(null), localStorage.setItem("token", null), setUser(null))
+        (setToken(null), localStorage.removeItem("token"), setUser(null))
       : alert("No users are signed in!");
   }
 

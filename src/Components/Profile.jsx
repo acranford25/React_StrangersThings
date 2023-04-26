@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import { fetchMyData, deletePosts } from "../api";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function Profile() {
   const [posts, setPosts] = useState([]);
   const [post, setPost] = useState({});
   const [mesages, setMessages] = useState([]);
   const { token } = useAuth();
+  const { postId } = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetch() {
@@ -16,7 +19,7 @@ export default function Profile() {
         console.log("result from profile", result);
         setPosts(result.data.posts);
       } catch (error) {
-        alert("No users found, please log in.");
+        alert("No users found, please log in to view profile.");
       }
     }
     if (token) {
@@ -38,6 +41,14 @@ export default function Profile() {
                   <span className="description">{post.description}</span>
                   <span className="price">{post.price}</span>
                 </div>
+                <form
+                  onClick={() => {
+                    console.log("onclick", post._id);
+                    navigate(`/${post._id}`);
+                  }}
+                >
+                  <button type="onClick">Edit</button>
+                </form>
                 <form
                   onClick={(event) => {
                     event.preventDefault();
@@ -64,6 +75,13 @@ export default function Profile() {
                   <span className="description">{post.description}</span>
                   <span className="price">{post.price}</span>
                 </div>
+                <form
+                  onClick={() => {
+                    navigate(`/${post._id}`);
+                  }}
+                >
+                  <button type="onClick">Edit</button>
+                </form>
               </div>
             )
           );

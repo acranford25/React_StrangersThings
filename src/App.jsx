@@ -6,8 +6,8 @@ import Home from "./Components/Home";
 import RegisterForm from "./Components/RegisterForm";
 import Profile from "./Components/Profile";
 import LogIn from "./Components/Login";
-import LogOut from "./Components/Logout";
 import useAuth from "./hooks/useAuth";
+import EditPost from "./Components/EditPost";
 
 function App() {
   const { user } = useAuth();
@@ -16,7 +16,7 @@ function App() {
     <div className="App">
       <div id="header">
         <div id="navbar">
-          {user ? (
+          {user && user.username ? (
             <div id="user">
               {user.username.length > 10
                 ? `Hi, ${user.username.substring(0, 8)}..`
@@ -52,6 +52,7 @@ function App() {
             <Route path="/post" element={<Post />} />
             <Route path="/logIn/*" element={<LogIn />} />
             <Route path="/register" element={<RegisterForm />} />
+            <Route path="/:postId" element={<EditPost />} />
           </Routes>
         </div>
       </div>
