@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { fetchMyData, deletePosts } from "../api";
+import { fetchMyData, deletePosts, patchPosts } from "../api";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -75,13 +75,6 @@ export default function Profile() {
                   <span className="description">{post.description}</span>
                   <span className="price">{post.price}</span>
                 </div>
-                <form
-                  onClick={() => {
-                    navigate(`/${post._id}`);
-                  }}
-                >
-                  <button type="onClick">Edit</button>
-                </form>
               </div>
             )
           );

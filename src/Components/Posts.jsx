@@ -2,11 +2,13 @@ import React, { useEffect } from "react";
 import { getPosts } from "../api";
 import { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import { useNavigate } from "react-router-dom";
 
 export default function Posts() {
   const [posts, setPosts] = useState([]);
   const [posters, setPosters] = useState([]);
   const { user, token } = useAuth();
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function getGetPosts() {
@@ -38,8 +40,12 @@ export default function Posts() {
                 {post.willDeliver ? "Will Deliver" : "Pick Up Only"}
               </span>
               {token && user.username !== post.author.username ? (
-                <form>
-                  <input type="text" name="message"></input>
+                <form
+                  onClick={() => {
+                    navigate(`/${post._id}/messages`);
+                  }}
+                >
+                  <button>Message</button>
                 </form>
               ) : (
                 <></>

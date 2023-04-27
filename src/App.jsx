@@ -8,6 +8,7 @@ import Profile from "./Components/Profile";
 import LogIn from "./Components/Login";
 import useAuth from "./hooks/useAuth";
 import EditPost from "./Components/EditPost";
+import Message from "./Components/Message";
 
 function App() {
   const { user } = useAuth();
@@ -53,6 +54,7 @@ function App() {
             <Route path="/logIn/*" element={<LogIn />} />
             <Route path="/register" element={<RegisterForm />} />
             <Route path="/:postId" element={<EditPost />} />
+            <Route path="/:postId/messages" element={<Message />} />
           </Routes>
         </div>
       </div>
