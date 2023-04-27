@@ -6,14 +6,24 @@ import { getPost } from "../api";
 
 export default function EditPost() {
   const { postId } = useParams();
-  console.log("useParams", postId);
   const { token } = useAuth();
+
+  const [checked, setChecked] = useState(true);
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [price, setPrice] = useState();
+  const [willDeliver, setWillDeliver] = useState();
+  console.log(price);
 
   useEffect(() => {
     async function getGetPost() {
       const result = await getPost(postId);
       console.log("result in EditPost", result);
-      return result.data;
+      setTitle(result.title);
+      setDescription(result.description);
+      setPrice(result.price);
+      setWillDeliver(result.willDeliver);
+      return result;
     }
     getGetPost();
   }, []);
@@ -30,12 +40,17 @@ export default function EditPost() {
         willDeliver
       );
       if (token) {
-        console.log(result);
+        console.log(result.data);
         return result;
       }
     } catch (error) {
       console.log("trouble fetching makePosts", error);
     }
+  }
+
+  function handleChange(event) {
+    setWillDeliver(event.target.value);
+    setChecked(event.target.value);
   }
 
   return (
@@ -44,20 +59,20 @@ export default function EditPost() {
         <input
           type="text"
           name="title"
-          placeholder="title"
+          placeholder={title}
           required={true}
           onChange={(event) => setTitle(event.target.value)}
         />
         <input
           type="text"
           name="description"
-          placeholder="description"
+          placeholder={description}
           onChange={(event) => setDescription(event.target.value)}
         />
         <input
           type="text"
           name="price"
-          placeholder="price 0.00"
+          placeholder={price}
           required={true}
           onChange={(event) => setPrice(event.target.value)}
         />
@@ -70,8 +85,8 @@ export default function EditPost() {
               type="radio"
               name="willDeliver"
               value={true}
-              checked={true}
-              onChange={(event) => setWillDeliver(event.target.value)}
+              checked={checked}
+              onChange={handleChange}
             />
           </label>
           <label>
@@ -80,7 +95,8 @@ export default function EditPost() {
               type="radio"
               name="willDeliver"
               value={false}
-              onChange={(event) => setWillDeliver(event.target.value)}
+              checked={checked}
+              onChange={handleChange}
             />
           </label>
         </div>

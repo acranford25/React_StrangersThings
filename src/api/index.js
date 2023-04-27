@@ -159,7 +159,7 @@ export async function patchPosts(
   }
 }
 
-export async function postMessage() {
+export async function postMessage(token, postId) {
   try {
     const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
       method: "POST",
