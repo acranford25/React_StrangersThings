@@ -8,11 +8,10 @@ export default function EditPost() {
   const { postId } = useParams();
   const { token } = useAuth();
 
-  const [checked, setChecked] = useState(true);
   const [title, setTitle] = useState();
   const [description, setDescription] = useState();
   const [price, setPrice] = useState();
-  const [willDeliver, setWillDeliver] = useState();
+  const [willDeliver, setWillDeliver] = useState(true);
   console.log(price);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function EditPost() {
         willDeliver
       );
       if (token) {
-        console.log(result.data);
+        console.log("handle submit", result.data);
         return result;
       }
     } catch (error) {
@@ -49,13 +48,13 @@ export default function EditPost() {
   }
 
   function handleChange(event) {
-    setWillDeliver(event.target.value);
-    setChecked(event.target.value);
+    setWillDeliver(event.target.value === "true");
+    console.log("value", event.target.value === "true");
   }
 
   return (
     <div>
-      <form onClick={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
@@ -85,7 +84,7 @@ export default function EditPost() {
               type="radio"
               name="willDeliver"
               value={true}
-              checked={checked}
+              checked={willDeliver}
               onChange={handleChange}
             />
           </label>
@@ -95,7 +94,7 @@ export default function EditPost() {
               type="radio"
               name="willDeliver"
               value={false}
-              checked={checked}
+              checked={!willDeliver}
               onChange={handleChange}
             />
           </label>

@@ -21,7 +21,7 @@ export default function Post() {
         willDeliver
       );
       if (token) {
-        console.log(result);
+        console.log("post handleSubmit", result);
         return result;
       }
     } catch (error) {
@@ -29,9 +29,14 @@ export default function Post() {
     }
   }
 
+  function handleChange(event) {
+    setWillDeliver(event.target.value === "true");
+    console.log("value", event.target.value === "true");
+  }
+
   return (
     <div>
-      <form onClick={handleSubmit}>
+      <form onSubmit={handleSubmit}>
         <input
           type="text"
           name="title"
@@ -61,8 +66,8 @@ export default function Post() {
               type="radio"
               name="willDeliver"
               value={true}
-              checked={true}
-              onChange={(event) => setWillDeliver(event.target.value)}
+              checked={willDeliver}
+              onChange={handleChange}
             />
           </label>
           <label>
@@ -70,8 +75,8 @@ export default function Post() {
             <input
               type="radio"
               name="willDeliver"
-              value={false}
-              onChange={(event) => setWillDeliver(event.target.value)}
+              value={!willDeliver}
+              onChange={handleChange}
             />
           </label>
         </div>
