@@ -85,6 +85,26 @@ export async function getPost(postId) {
   }
 }
 
+export async function getPostMessages(token, postId) {
+  try {
+    const response = await fetch(`${BASE_URL}users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = await response.json();
+    console.log("Result from getPostMessages(postId)", result.data.messages);
+    const messages = result.data.messages.filter(
+      (message) => message.post._id === postId
+    );
+    console.log("messages", messages);
+    return messages;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 export async function makePosts(token, title, description, price, willDeliver) {
   try {
     const response = await fetch(`${BASE_URL}posts`, {

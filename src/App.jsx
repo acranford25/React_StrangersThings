@@ -35,9 +35,6 @@ function App() {
           <Link to="/profile" className="links">
             Profile
           </Link>
-          <Link to="/post" className="log">
-            Post
-          </Link>
           <Link to="/logIn" className="log">
             Log In/Out
           </Link>

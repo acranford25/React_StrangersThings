@@ -1,6 +1,7 @@
 import { makePosts } from "../api";
 import useAuth from "../hooks/useAuth";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Post() {
   const [title, setTitle] = useState("");
@@ -9,6 +10,7 @@ export default function Post() {
   const [willDeliver, setWillDeliver] = useState(true);
 
   const { token } = useAuth();
+  const navigate = useNavigate();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -22,6 +24,7 @@ export default function Post() {
       );
       if (token) {
         console.log("post handleSubmit", result);
+        navigate(-1);
         return result;
       }
     } catch (error) {
