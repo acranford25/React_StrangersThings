@@ -3,16 +3,18 @@ import useAuth from "../hooks/useAuth";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getPost } from "../api";
+import { useNavigate } from "react-router-dom";
 
 export default function EditPost() {
   const { postId } = useParams();
-  const { token } = useAuth();
+  const { token, user, setUser } = useAuth();
+  const navigate = useNavigate();
 
-  const [title, setTitle] = useState();
-  const [description, setDescription] = useState();
-  const [price, setPrice] = useState();
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [price, setPrice] = useState(null);
   const [willDeliver, setWillDeliver] = useState(true);
-  console.log(price);
+  console.log("price", price);
 
   useEffect(() => {
     async function getGetPost() {
@@ -27,6 +29,8 @@ export default function EditPost() {
     getGetPost();
   }, []);
 
+  console.log("user", user);
+
   async function handleSubmit(event) {
     event.preventDefault();
     try {
@@ -38,10 +42,10 @@ export default function EditPost() {
         price,
         willDeliver
       );
-      if (token) {
-        console.log("handle submit", result.data);
-        return result;
-      }
+
+      console.log("handle submit", result.data);
+      navigate(`/profile`);
+      return result.data;
     } catch (error) {
       console.log("trouble fetching makePosts", error);
     }
@@ -60,18 +64,21 @@ export default function EditPost() {
           name="title"
           placeholder={title}
           required={true}
+          value={title}
           onChange={(event) => setTitle(event.target.value)}
         />
         <input
           type="text"
           name="description"
           placeholder={description}
+          value={description}
           onChange={(event) => setDescription(event.target.value)}
         />
         <input
           type="text"
           name="price"
           placeholder={price}
+          value={price}
           required={true}
           onChange={(event) => setPrice(event.target.value)}
         />

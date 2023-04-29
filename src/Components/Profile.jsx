@@ -41,22 +41,28 @@ export default function Profile() {
                   <span className="description">{post.description}</span>
                   <span className="price">{post.price}</span>
                 </div>
-                <form
-                  onClick={() => {
-                    console.log("onclick", post._id);
-                    navigate(`/${post._id}`);
-                  }}
-                >
-                  <button type="onClick">Edit</button>
+                <form>
+                  <button
+                    type="onClick"
+                    onClick={() => {
+                      console.log("onclick", post._id);
+                      navigate(`/${post._id}`);
+                    }}
+                  >
+                    Edit
+                  </button>
                 </form>
-                <form
-                  onClick={(event) => {
-                    event.preventDefault();
-                    console.log(post._id);
-                    deletePosts(token, post._id);
-                  }}
-                >
-                  <button type="onClick">Delete</button>
+                <form>
+                  <button
+                    type="onClick"
+                    onClick={(event) => {
+                      event.preventDefault();
+                      console.log(post._id);
+                      deletePosts(token, post._id);
+                    }}
+                  >
+                    Delete
+                  </button>
                 </form>
               </div>
             )

@@ -153,13 +153,15 @@ export async function patchPosts(
     });
     const result = await response.json();
     console.log("result from patch", result);
-    return result;
+    if (token) {
+      return result;
+    }
   } catch (error) {
     console.log(error);
   }
 }
 
-export async function postMessage(token, postId) {
+export async function postMessage(token, postId, content) {
   try {
     const response = await fetch(`${BASE_URL}/posts/${postId}/messages`, {
       method: "POST",

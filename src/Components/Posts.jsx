@@ -32,20 +32,26 @@ export default function Posts() {
         {posts.map((post) => {
           return (
             <div className="post" key={post._id}>
-              <span className="name">{post.username}</span>
-              <span className="title">{post.title}</span>
-              <span className="description">{post.description}</span>
-              <span className="price">{post.price}</span>
+              <span className="name">Seller: {post.author.username}</span>
+              <span className="title">Item: {post.title}</span>
+              <span className="description">
+                Item Description: {post.description}
+              </span>
+              <span className="price">Price: {post.price}</span>
               <span className="willDeliver">
-                {post.willDeliver ? "Will Deliver" : "Pick Up Only"}
+                {" "}
+                Delivery:
+                {post.willDeliver ? " Will Deliver" : " Pick Up Only"}
               </span>
               {token && user.username !== post.author.username ? (
-                <form
-                  onClick={() => {
-                    navigate(`/${post._id}/messages`);
-                  }}
-                >
-                  <button>Message</button>
+                <form>
+                  <button
+                    onClick={() => {
+                      navigate(`/${post._id}/messages`);
+                    }}
+                  >
+                    Message
+                  </button>
                 </form>
               ) : (
                 <></>
