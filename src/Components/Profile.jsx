@@ -25,7 +25,7 @@ export default function Profile() {
     if (token) {
       fetch();
     }
-  }, [token]);
+  }, [token, posts]);
 
   return (
     <div>
@@ -40,7 +40,7 @@ export default function Profile() {
       </form>
       <div id="myPosts">
         <section className="myPosts">
-          <h2>Active Posts</h2>
+          <h2>My Posts</h2>
           {posts.map((post) => {
             return (
               post.active && (
